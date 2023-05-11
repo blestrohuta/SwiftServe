@@ -24,8 +24,22 @@ module.exports = (sequelize, DataTypes) => {
     },
     UserId: DataTypes.INTEGER,
     ItemId: DataTypes.INTEGER,
-    startDate: DataTypes.DATE,
-    duration: DataTypes.INTEGER,
+    startDate: {
+      type: DataTypes.DATE,
+      validate: {
+        notEmpty: {
+          msg: 'Date cannot be empty'
+        }
+      }
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: 'Duration cannot be empty'
+        }
+      }
+    },
     price: DataTypes.INTEGER
   }, {
     sequelize,

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Order Details</h1>
+
+    <table border="1">
+        <thead>
+            <th>No</th>
+            <th>Item Name</th>
+            <th>Start Date</th>
+            <th>Duration</th>
+            <th>Price</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+                <tr>
+                    <td><%= 1 %></td>
+                    <td><%= order.Item?.name %></td>
+                    <td><%= order.startDate %></td>
+                    <td><%= order.duration %></td>
+                    <td><%= formatNumber(order.price) %></td>
+                    <td>
+
+                        <a href="/order/delete/<%= order.UserId %>/<%= order.id %>"><button>Delete</button></a> | 
+                        <a href="/order/update/<%= order.UserId %>/<%= order.id %>"><button>Add More</button></a>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

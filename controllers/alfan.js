@@ -1,3 +1,4 @@
+const formatNumber = require('../helpers/helper')
 const { Category, Item, OrderDemand, Profile, User } = require('../models')
 
 class Controller1 {
@@ -5,7 +6,6 @@ class Controller1 {
         const { userId } = req.params
         OrderDemand.findAll({ include: { all: true } })
             .then(order => {
-                // console.log(order);
                 res.render('orderPerUser', { order, userId })
             })
             .catch(err => {
@@ -14,8 +14,12 @@ class Controller1 {
     }
 
     static getAddOrderByUserId(req, res) {
+        let msg;
+        if (req.query.errors) {
+            msg = req.query.errors.split(',');
+        }
         const { userId, itemId } = req.params
-        res.render('formAddOrder', { userId, itemId })
+        res.render('formAddOrder', { userId, itemId, msg })
     }
 
     static postAddOrderByUserId(req, res) {
@@ -24,17 +28,24 @@ class Controller1 {
         let price;
         Item.findByPk(itemId)
             .then(item => {
-                price = item.price * duration
+                if (price) {
+                    price = item.price * duration
+                }
                 const newOrder = { UserId : userId, ItemId : itemId, startDate, duration, price }
-                console.log(newOrder);
                 return OrderDemand.create(newOrder)
             })
             .then(order => {
-                // console.log(order);
                 res.redirect(`/order/${userId}`)
             })
             .catch(err => {
-                res.send(err)
+                if (err.name == 'SequelizeValidationError') {
+                    const errors = err.errors.map(el => {
+                        return el.message
+                    });
+                    res.redirect(`/order/add/${userId}/${itemId}?errors=${errors}`)
+                } else {
+                    res.send(err)
+                }
             })
     }
 
@@ -53,9 +64,11 @@ class Controller1 {
 
     static orderDetail(req, res) {
         const {orderDemandId, userId} = req.params
-        OrderDemand.findByPk({id: orderDemandId})
+        OrderDemand.findByPk(orderDemandId, {
+            include: ['Item']
+        })
             .then(order => {
-                console.log(order);
+                res.render('orderDetail', {order, formatNumber})
             })
             .catch(err => {
                 res.send(err)
@@ -63,7 +76,24 @@ class Controller1 {
     }
 
     static updateOrder(req, res) {
+        const {orderDemandId, userId} = req.params
+        OrderDemand.findByPk(orderDemandId, {include: ['Item']})
+            .then(order => {
+                const duration = order.duration + 1;
+                const price = order.Item?.price * duration;
+                return OrderDemand.update({duration, price}, {
+                    where: {
+                        id: orderDemandId
+                    }
+                })
+            })
+            .then(order => {
+                res.redirect(`/order/detail/${userId}/${orderDemandId}`)
 
+            })
+            .catch(err => {
+                res.send(err)
+            })
     }
 }
 

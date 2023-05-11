@@ -9,6 +9,12 @@
 <body>
     <h1>Add New Order</h1>
 
+    <% if (msg) { %>
+        <% msg.forEach(element => { %>
+         <p><%= element %></p>
+        <% }) %>
+    <% } %>
+
     <form action="/order/add/<%= userId %>/<%= itemId %>" method="post">
 
         <label for="startDate">Start Date</label>

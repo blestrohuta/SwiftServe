@@ -20,8 +20,31 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init({
     username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+        isEmail: {
+          msg: "input a valid email"
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+        minLength(value) {
+          if (!value || value.length < 8) {
+            throw new Error("length min is 8");
+          }
+        },
+      }
+    },
     role: DataTypes.STRING
   }, {
     hooks: {

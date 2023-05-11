@@ -48,7 +48,12 @@ class Controller {
                 res.redirect('login')
             })
             .catch(err => {
-                res.send(err)
+                if (err.name == "SequelizeValidationError") {
+                    const error = err.errors.map(el => el.message)
+                    res.send(error)
+                } else {
+                    res.send(err)
+                }
             })
     }
 
@@ -80,11 +85,19 @@ class Controller {
         Item.findAll({
         })
             .then(item => {
-                res.render('item', { item })
+                const formattedPrice = item.map(el => {
+                    return Item.formatPrice(el.price)
+                })
+                console.log(formattedPrice);
+                res.render('item', { item, formattedPrice })
             })
             .catch(err => {
                 res.send(err)
             })
+    }
+
+    static addItemtoOrder(req, res) {
+        res.redirect(`/order/add/${req.session.userId}/${req.body.itemId}`)
     }
 }
 

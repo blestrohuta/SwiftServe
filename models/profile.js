@@ -9,6 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
+    get maskedPhoneNumber() {
+      let editedPhoneNumber = this.phoneNumber;
+
+      if (editedPhoneNumber.length > 4) {
+        const numDigitsToMask = editedPhoneNumber.length - 4;
+        const maskedDigits = '*'.repeat(numDigitsToMask);
+        editedPhoneNumber = editedPhoneNumber.substring(0, 4) + maskedDigits;
+      }
+
+      return editedPhoneNumber;
+    }
+
     static associate(models) {
       // define association here
       Profile.belongsTo(models.User)

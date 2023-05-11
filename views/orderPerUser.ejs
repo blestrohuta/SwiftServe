@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Order</h1>
+
+    <table border="1">
+        <thead>
+            <th>No</th>
+            <th>Item Name</th>
+            <th>Start Date</th>
+            <!-- <th>Duration</th>
+            <th>Price</th> -->
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <% order.forEach((element, i) => { %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><%= element.Item?.name %></td>
+                    <td><%= element.startDate %></td>
+                    <!-- <td><%= element.duration %></td>
+                    <td><%= element.price %></td> -->
+                    <td>
+
+                        <a href="/order/detail/<%= element.UserId %>/<%= element.id %>"><button>Detail</button></a>
+
+                        <!-- <a href="/order/delete/<%= element.UserId %>/<%= element.id %>"><button>Delete</button></a> | 
+                        <a href="/order/update/<%= element.UserId %>/<%= element.id %>"><button>Update</button></a> -->
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,4 +1,5 @@
 'use strict';
+
 let data = require('../data/category.json')
 data.forEach(el => {
   el.createdAt = new Date()

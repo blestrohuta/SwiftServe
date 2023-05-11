@@ -27,15 +27,15 @@ router.get('/item', Controller2.item)
 
 //-------------
 
-router.get('/order/:userId',)
 
-router.get('/order/add/:userId/:itemId',)
-router.post('/order/add/:userId:itemId',)
+router.get('/order/add/:userId/:itemId',Controller1.getAddOrderByUserId)
+router.post('/order/add/:userId/:itemId',Controller1.postAddOrderByUserId)
 
-router.get('/order/delete/:orderDemandId',)
-router.get('/order/detail/:orderDemandId',)
-router.get('/order/update/:orderDemandId',)   //status
+router.get('/order/delete/:userId/:orderDemandId',Controller1.deleteOrder)
+router.get('/order/detail/:userId/:orderDemandId',Controller1.orderDetail)
+router.get('/order/update/:userId/:orderDemandId',Controller1.updateOrder)   //status
 
+router.get('/order/:userId', Controller1.orderByUserId)
 
 
 module.exports = router

@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Cat Grooming",
+        "description": "The Best cat grooming in town for all cat",
+        "price": "15000",
+        "CategoryId": "1",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
+    },
+    {
+        "name": "Dog Grooming",
+        "description": "The Best Dog grooming in town for all dog",
+        "price": "12000",
+        "CategoryId": "1",
+        "imageUrl": "https://t.ly/833kJ"
+    },
+    {
+        "name": "Massage",
+        "description": "The Best Massage in town",
+        "price": "22000",
+        "CategoryId": "2",
+        "imageUrl": "https://t.ly/RP0F"
+    },
+    {
+        "name": "Spa",
+        "description": "The Best Spa in town",
+        "price": "32000",
+        "CategoryId": "2",
+        "imageUrl": "https://t.ly/RiZm1"
+    },
+    {
+        "name": "Service Motor",
+        "description": "The most reliable Service Motor in town",
+        "price": "28000",
+        "CategoryId": "3",
+        "imageUrl": "https://t.ly/GczN"
+    },
+    {
+        "name": "Service Mobil",
+        "description": "The most reliable Service Mobil in town",
+        "price": "66000",
+        "CategoryId": "3",
+        "imageUrl": "https://t.ly/7Hqf"
+    }
+]

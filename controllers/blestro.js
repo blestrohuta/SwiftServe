@@ -88,7 +88,6 @@ class Controller {
                 const formattedPrice = item.map(el => {
                     return Item.formatPrice(el.price)
                 })
-                console.log(formattedPrice);
                 res.render('item', { item, formattedPrice })
             })
             .catch(err => {

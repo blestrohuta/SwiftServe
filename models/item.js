@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
+    static formatPrice(price) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price)
+    }
+
     static associate(models) {
       Item.belongsTo(models.Category)
       Item.hasMany(models.OrderDemand)
